@@ -9,7 +9,7 @@ import { LicenseModal } from './components/LicenseModal'
 import { FREE_LIMIT } from './lib/license'
 import type { CompressOptions } from './lib/compressor'
 
-const CHECKOUT_URL = 'https://squish.lemonsqueezy.com/checkout/buy/squish-pro'
+const CHECKOUT_URL = 'https://yomiyasu.lemonsqueezy.com/checkout/buy/94c33544-4424-482d-8ef7-def1677f4e20'
 
 const DEFAULT_OPTIONS: CompressOptions = {
   maxSizeMB: 1,
