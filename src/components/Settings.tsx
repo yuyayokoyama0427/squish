@@ -5,6 +5,13 @@ interface Props {
   onChange: (options: CompressOptions) => void
 }
 
+const DEFAULT_OPTIONS: CompressOptions = {
+  maxSizeMB: 1,
+  maxWidthOrHeight: 1920,
+  outputFormat: 'jpeg',
+  quality: 80,
+}
+
 export function Settings({ options, onChange }: Props) {
   function update<K extends keyof CompressOptions>(key: K, value: CompressOptions[K]) {
     onChange({ ...options, [key]: value })
@@ -12,7 +19,15 @@ export function Settings({ options, onChange }: Props) {
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-4">
-      <h3 className="text-sm font-semibold text-gray-700">変換設定</h3>
+      <div className="flex items-center justify-between">
+        <h3 className="text-sm font-semibold text-gray-700">変換設定</h3>
+        <button
+          onClick={() => onChange(DEFAULT_OPTIONS)}
+          className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+        >
+          デフォルトに戻す
+        </button>
+      </div>
 
       {/* 出力形式 */}
       <div>
