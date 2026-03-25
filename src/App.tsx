@@ -41,6 +41,9 @@ export default function App() {
           <div className="flex items-center gap-2">
             <span className="text-xl font-bold text-gray-900">Squish</span>
             <span className="text-xs text-gray-400">画像一括圧縮・リサイズ</span>
+            <span className="hidden sm:inline-flex items-center gap-1 text-xs bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded-full">
+              🔒 サーバーに送信されません
+            </span>
           </div>
           <div className="flex items-center gap-2">
             {isPro ? (
