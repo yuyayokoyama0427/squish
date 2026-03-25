@@ -27,6 +27,10 @@ export default function App() {
   const canAdd = isPro || images.length < FREE_LIMIT
   const doneCount = images.filter(i => i.status === 'done').length
   const pendingCount = images.filter(i => i.status === 'pending').length
+  const totalOriginal = images.filter(i => i.status === 'done').reduce((s, i) => s + i.originalSize, 0)
+  const totalCompressed = images.filter(i => i.status === 'done').reduce((s, i) => s + (i.compressedSize ?? 0), 0)
+  const savedMB = ((totalOriginal - totalCompressed) / 1024 / 1024).toFixed(1)
+  const savedPct = totalOriginal > 0 ? Math.round((1 - totalCompressed / totalOriginal) * 100) : 0
 
   async function handleActivate(key: string) {
     await activate(key)
@@ -119,6 +123,13 @@ export default function App() {
                 クリア
               </button>
             </div>
+
+            {/* 削減量バナー */}
+            {doneCount > 0 && totalOriginal > 0 && (
+              <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 text-sm text-emerald-700 text-center font-medium">
+                合計 {savedMB}MB 削減（{savedPct}% 圧縮）
+              </div>
+            )}
 
             {/* Image List */}
             <div className="space-y-2">
