@@ -36,12 +36,16 @@ export function useCompressor() {
   }, [])
 
   const processAll = useCallback(async (options: CompressOptions) => {
+    // pending画像をクロージャで先に確定させてからステート更新する（非同期更新タイミングのズレを防ぐ）
+    const pending = images.filter(i => i.status === 'pending')
+    if (pending.length === 0) return
+
     setIsProcessing(true)
     setImages(prev => prev.map(img =>
       img.status === 'pending' ? { ...img, status: 'processing' as const } : img
     ))
 
-    for (const img of images.filter(i => i.status === 'pending' || i.status === 'processing')) {
+    for (const img of pending) {
       try {
         const blob = await compressImage(img.originalFile, options)
         setImages(prev => prev.map(i =>

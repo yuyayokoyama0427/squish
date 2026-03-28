@@ -16,6 +16,13 @@ export function LicenseModal({ onActivate, onClose, loading, error }: Props) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
         <h2 className="text-lg font-bold text-gray-800 mb-1">Pro版を有効化</h2>
+
+        <div className="bg-emerald-50 rounded-xl p-3 mb-4 text-sm text-emerald-800 space-y-1">
+          <p className="font-semibold text-emerald-900 mb-1.5">Pro版でできること</p>
+          <p>✓ 画像枚数が無制限（無料版は5件まで）</p>
+          <p>✓ 買い切り980円・追加料金なし</p>
+        </div>
+
         <p className="text-sm text-gray-500 mb-4">
           購入後にメールで届いたライセンスキーを入力してください。
         </p>

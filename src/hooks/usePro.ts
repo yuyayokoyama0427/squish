@@ -9,11 +9,20 @@ export function usePro() {
   async function activate(key: string) {
     setLoading(true)
     setError(null)
-    const ok = await validateLicense(key)
-    if (ok) {
-      setIsPro(true)
-    } else {
-      setError('ライセンスキーが無効です。再確認してください。')
+    try {
+      const ok = await validateLicense(key)
+      if (ok) {
+        setIsPro(true)
+      } else {
+        setError('ライセンスキーが無効です。再確認してください。')
+      }
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : ''
+      if (msg === 'network') {
+        setError('通信エラーが発生しました。インターネット接続を確認してください。')
+      } else {
+        setError('ライセンスキーが無効です。再確認してください。')
+      }
     }
     setLoading(false)
   }
