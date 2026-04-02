@@ -25,10 +25,15 @@ export function DropZone({ onFiles, disabled, limit, currentCount = 0 }: Props) 
 
   return (
     <div
+      role="button"
+      tabIndex={disabled ? -1 : 0}
+      aria-label="画像をドロップ、またはクリックして選択"
+      aria-disabled={disabled}
       className={`border-2 border-dashed rounded-2xl p-10 text-center transition cursor-pointer
         ${dragging ? 'border-emerald-400 bg-emerald-50' : 'border-gray-300 hover:border-emerald-400 hover:bg-emerald-50'}
         ${disabled ? 'opacity-50 pointer-events-none' : ''}`}
       onClick={() => inputRef.current?.click()}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inputRef.current?.click() } }}
       onDragOver={e => { e.preventDefault(); setDragging(true) }}
       onDragLeave={() => setDragging(false)}
       onDrop={e => { e.preventDefault(); setDragging(false); handleFiles(e.dataTransfer.files) }}

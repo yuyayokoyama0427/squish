@@ -131,6 +131,16 @@ export default function App() {
               </div>
             )}
 
+            {/* 変換完了後のProナッジ */}
+            {!isPro && doneCount > 0 && doneCount >= FREE_LIMIT && (
+              <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-center">
+                <span className="text-amber-700">{doneCount}件の変換が完了しました！</span>
+                <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="ml-2 underline font-medium text-amber-800">
+                  Pro版（買い切り980円）なら次回から無制限で →
+                </a>
+              </div>
+            )}
+
             {/* Image List */}
             <div className="space-y-2">
               {images.map(img => (
